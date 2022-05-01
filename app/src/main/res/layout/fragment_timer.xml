@@ -59,7 +59,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:background="@drawable/bg_uni_name"
-            android:elevation="8dp"
+            android:elevation="4dp"
             android:padding="8dp"
             android:textSize="20sp"
             tools:text="赤井星" />

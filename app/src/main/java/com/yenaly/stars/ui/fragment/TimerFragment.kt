@@ -1,14 +1,21 @@
 package com.yenaly.stars.ui.fragment
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.NotificationCompat
 import androidx.lifecycle.lifecycleScope
 import com.yenaly.stars.R
 import com.yenaly.stars.databinding.FragmentTimerBinding
 import com.yenaly.stars.logic.UniverseRepo
+import com.yenaly.stars.ui.activity.MainActivity
 import com.yenaly.stars.ui.dialog.SelectBottomDialog
 import com.yenaly.stars.ui.service.NotificationService
 import com.yenaly.stars.ui.view.CircularSeekBar
@@ -111,9 +118,15 @@ class TimerFragment : YenalyFragment<FragmentTimerBinding, MainViewModel>() {
                         }
                     }
                 }.flowOn(Dispatchers.Main)
-                    .onStart {}
+                    .onStart {
+                        val intent = Intent(activity, NotificationService::class.java).apply {
+                            putExtra("stop", false)
+                        }
+                        activity?.startService(intent)
+                    }
                     .onCompletion {
                         seekBar.isTouchEnabled = true
+                        successNotification()
                         withContext(Dispatchers.IO) {
                             val lastUniName =
                                 getSpValue("uni", viewModel.uniList.filter { !it.isLight }[0].name)
@@ -122,9 +135,11 @@ class TimerFragment : YenalyFragment<FragmentTimerBinding, MainViewModel>() {
                                 it.focusTime += progress / 60F
                                 UniverseRepo.getInstance().updateUniverse(it)
                             }
+                            val intent = Intent(activity, NotificationService::class.java).apply {
+                                putExtra("stop", true)
+                            }
+                            activity?.startService(intent)
                         }
-                        val intent = Intent(activity, NotificationService::class.java)
-                        activity?.startService(intent)
                     }
                     .onEach { seekBar.progress = it }
                     .launchIn(lifecycleScope)
@@ -134,5 +149,28 @@ class TimerFragment : YenalyFragment<FragmentTimerBinding, MainViewModel>() {
 
             }
         })
+    }
+
+    private fun successNotification() {
+        val mnm = requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                "114514",
+                "Stars",
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            channel.enableLights(false)
+            mnm.createNotificationChannel(channel)
+        }
+        val notificationIntent = Intent(activity, MainActivity::class.java)
+        val pt = PendingIntent.getActivity(context, 0, notificationIntent, 0)
+        val notification = NotificationCompat.Builder(requireContext(), "114514")
+            .setSmallIcon(R.drawable.ic_uni_2)
+            .setContentTitle(getString(R.string.app_name))
+            .setContentText("倒计时结束，快回来看看吧")
+            .setWhen(System.currentTimeMillis())
+            .setContentIntent(pt)
+            .build()
+        mnm.notify(2, notification)
     }
 }
