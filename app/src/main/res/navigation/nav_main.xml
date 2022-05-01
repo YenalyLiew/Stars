@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/timer_fragment">
+
+    <fragment
+        android:id="@+id/timer_fragment"
+        android:name="com.yenaly.stars.ui.fragment.TimerFragment"
+        android:label="TimerFragment" />
+    <fragment
+        android:id="@+id/universe_fragment"
+        android:name="com.yenaly.stars.ui.fragment.UniverseFragment"
+        android:label="UniverseFragment" />
+    <fragment
+        android:id="@+id/personal_fragment"
+        android:name="com.yenaly.stars.ui.fragment.PersonalFragment"
+        android:label="PersonalFragment" />
+
+</navigation>

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Stars</string>
+    <string name="timer">计时器</string>
+    <string name="universe">星球</string>
+    <string name="my">我的</string>
+    <string name="avatar">头像</string>
+    <string name="time_course">时间历程</string>
+    <string name="achievement">成就</string>
+    <string name="feedback">意见反馈</string>
+    <string name="wait_for_light">待点亮</string>
+    <string name="add_universe">新增星球</string>
+    <string name="modify_info">修改星球信息</string>
+    <string name="light">点亮</string>
+    <string name="appearance">外观</string>
+    <string name="name">名称</string>
+    <string name="expect_light_time">预计点亮时间</string>
+    <string name="remark">备注</string>
+    <string name="create">创建</string>
+    <string name="focus_time">已专注</string>
+    <string name="light_date">点亮日期</string>
+    <string name="time">时长</string>
+</resources>
