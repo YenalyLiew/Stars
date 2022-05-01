@@ -19,4 +19,8 @@
     <string name="focus_time">已专注</string>
     <string name="light_date">点亮日期</string>
     <string name="time">时长</string>
+    <string name="delete">删除</string>
+    <string name="reason_for_delete">记下你离开的原因</string>
+    <string name="change">切换</string>
+    <string name="minute">分钟</string>
 </resources>

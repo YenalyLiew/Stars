@@ -35,7 +35,7 @@ class MainActivity : YenalyActivity<ActivityMainBinding, MainViewModel>() {
         binding.mainBnv.setupWithNavController(navController)
 
 
-        UniverseRepo.getInstance().getAllUniverse().observe(this) { uni ->
+        viewModel.uniListLiveData.observe(this) { uni ->
             viewModel.uniList.clear()
             viewModel.uniList.addAll(uni)
         }

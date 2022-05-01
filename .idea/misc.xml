@@ -12,15 +12,18 @@
         <entry key="..\:/Users/wrzg8/AndroidStudioProjects/Stars/app/src/main/res/drawable/shape_bottom_dialog.xml" value="0.1055" />
         <entry key="..\:/Users/wrzg8/AndroidStudioProjects/Stars/app/src/main/res/layout/activity_main.xml" value="0.1802536231884058" />
         <entry key="..\:/Users/wrzg8/AndroidStudioProjects/Stars/app/src/main/res/layout/dialog_add_universe.xml" value="0.44000000000000006" />
+        <entry key="..\:/Users/wrzg8/AndroidStudioProjects/Stars/app/src/main/res/layout/dialog_delete.xml" value="0.36" />
         <entry key="..\:/Users/wrzg8/AndroidStudioProjects/Stars/app/src/main/res/layout/dialog_l_universe_info.xml" value="0.36" />
         <entry key="..\:/Users/wrzg8/AndroidStudioProjects/Stars/app/src/main/res/layout/dialog_nl_universe_info.xml" value="0.44000000000000006" />
+        <entry key="..\:/Users/wrzg8/AndroidStudioProjects/Stars/app/src/main/res/layout/dialog_select.xml" value="0.1265625" />
+        <entry key="..\:/Users/wrzg8/AndroidStudioProjects/Stars/app/src/main/res/layout/dialog_select_universe.xml" value="0.44000000000000006" />
         <entry key="..\:/Users/wrzg8/AndroidStudioProjects/Stars/app/src/main/res/layout/dialog_universe_info.xml" value="0.3" />
         <entry key="..\:/Users/wrzg8/AndroidStudioProjects/Stars/app/src/main/res/layout/fragment_l_universe.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/wrzg8/AndroidStudioProjects/Stars/app/src/main/res/layout/fragment_nl_universe.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/wrzg8/AndroidStudioProjects/Stars/app/src/main/res/layout/fragment_personal.xml" value="0.5" />
         <entry key="..\:/Users/wrzg8/AndroidStudioProjects/Stars/app/src/main/res/layout/fragment_timer.xml" value="0.2" />
         <entry key="..\:/Users/wrzg8/AndroidStudioProjects/Stars/app/src/main/res/layout/fragment_universe.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/wrzg8/AndroidStudioProjects/Stars/app/src/main/res/layout/item_appearance.xml" value="0.36" />
+        <entry key="..\:/Users/wrzg8/AndroidStudioProjects/Stars/app/src/main/res/layout/item_appearance.xml" value="0.8" />
         <entry key="..\:/Users/wrzg8/AndroidStudioProjects/Stars/app/src/main/res/layout/item_universe.xml" value="0.4" />
         <entry key="..\:/Users/wrzg8/AndroidStudioProjects/Stars/app/src/main/res/menu/menu_main.xml" value="0.275" />
       </map>

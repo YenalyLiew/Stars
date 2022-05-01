@@ -116,10 +116,18 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_create"
+        android:id="@+id/btn_delete"
+        style="@style/Widget.Material3.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
+        android:text="@string/delete" />
+
+
+    <Button
+        android:id="@+id/btn_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/create" />
 
 </LinearLayout>

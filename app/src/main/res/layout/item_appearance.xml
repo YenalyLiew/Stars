@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/uni_appearance_ll"
     android:layout_width="80dp"
     android:layout_height="wrap_content"
@@ -14,6 +15,16 @@
         android:contentDescription="@string/universe">
 
     </ImageView>
+
+    <TextView
+        android:id="@+id/uni_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_uni_name"
+        android:padding="4dp"
+        android:visibility="gone"
+        tools:text="123" />
 
     <CheckBox
         android:id="@+id/check_box"

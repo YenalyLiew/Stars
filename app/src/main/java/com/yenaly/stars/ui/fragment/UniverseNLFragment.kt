@@ -1,5 +1,6 @@
 package com.yenaly.stars.ui.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import com.yenaly.stars.databinding.FragmentChildUniverseBinding
 import com.yenaly.stars.ui.adapter.UniverseNLAdapter
 import com.yenaly.stars.ui.viewmodel.MainViewModel
 import com.yenaly.yenaly_libs.base.YenalyFragment
+import com.yenaly.yenaly_libs.utils.isAppDarkMode
 
 /**
  * @ProjectName : Stars
@@ -30,10 +32,13 @@ class UniverseNLFragment : YenalyFragment<FragmentChildUniverseBinding, MainView
         return MainViewModel::class.java
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun initData() {
         binding.recyclerView.layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        val uniList = viewModel.uniList.filter { !it.isLight }
-        binding.recyclerView.adapter = UniverseNLAdapter(this, uniList)
+        viewModel.uniListLiveData.observe(viewLifecycleOwner) { allUniList ->
+            val uniList = allUniList.filter { !it.isLight }
+            binding.recyclerView.adapter = UniverseNLAdapter(this, uniList)
+        }
     }
 }

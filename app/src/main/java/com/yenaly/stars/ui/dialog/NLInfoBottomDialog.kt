@@ -8,10 +8,18 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.yenaly.stars.R
+import com.yenaly.stars.logic.UniverseRepo
 import com.yenaly.stars.logic.model.Universe
 import com.yenaly.yenaly_libs.utils.span.SpannedTextGenerator
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.*
 
 /**
  * @ProjectName : Stars
@@ -19,7 +27,7 @@ import com.yenaly.yenaly_libs.utils.span.SpannedTextGenerator
  * @Time : 2022/04/30 030 21:20
  * @Description : Description...
  */
-class NLInfoBottomDialog : BottomSheetDialogFragment() {
+class NLInfoBottomDialog(private val refresh: (() -> Unit)? = null) : BottomSheetDialogFragment() {
 
     private lateinit var uniAppearance: ImageView
     private lateinit var uniName: TextView
@@ -60,7 +68,8 @@ class NLInfoBottomDialog : BottomSheetDialogFragment() {
         SpannedTextGenerator.KotlinBuilder()
             .addText(getString(R.string.focus_time), isBold = true, isNewLine = false)
             .addText(" ", isNewLine = false)
-            .addText(universe.focusTime.toString(), isNewLine = false)
+            .addText(String.format("%.2f", universe.focusTime), isNewLine = false)
+            .addText(getString(R.string.minute), isNewLine = false)
             .showIn(uniFocusTime)
 
         SpannedTextGenerator.KotlinBuilder()
@@ -76,14 +85,47 @@ class NLInfoBottomDialog : BottomSheetDialogFragment() {
             .addText(" ", isNewLine = false)
             .addText(universe.remark, isNewLine = false)
             .showIn(uniRemark)
+
+        modifyInfo.setOnClickListener {
+            dialog.dismiss()
+            val modifyDialog = AddBottomDialog.newInstance(universe)
+            modifyDialog.show(requireActivity().supportFragmentManager, "AddDialog")
+        }
+
+        light.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("提示")
+                .setMessage("星球即将被点亮，做好准备了吗？")
+                .setPositiveButton("确认") { _, _ ->
+                    lifecycleScope.launch {
+                        universe.isLight = true
+                        val c = Calendar.getInstance()
+                        universe.lightDate =
+                            "${c.get(Calendar.YEAR)}/${c.get(Calendar.MONTH)}/${c.get(Calendar.DAY_OF_MONTH)}"
+                        withContext(Dispatchers.IO) {
+                            UniverseRepo.getInstance().updateUniverse(universe)
+                            withContext(Dispatchers.Main) {
+                                refresh?.invoke()
+                                dialog.dismiss()
+                                Toast.makeText(activity, "恭喜你已经成功点亮一颗星星", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                }
+                .setNegativeButton("取消", null)
+                .show()
+        }
     }
 
     companion object {
         private const val UNI_KEY = "UNI"
 
         @JvmStatic
-        fun getInstance(universe: Universe): NLInfoBottomDialog {
-            val infoBottomDialog = NLInfoBottomDialog()
+        fun getInstance(
+            universe: Universe,
+            refresh: (() -> Unit)? = null
+        ): NLInfoBottomDialog {
+            val infoBottomDialog = NLInfoBottomDialog(refresh)
             val bundle = Bundle()
             bundle.putSerializable(UNI_KEY, universe)
             infoBottomDialog.arguments = bundle

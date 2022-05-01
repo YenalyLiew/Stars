@@ -43,6 +43,10 @@ class UniverseRepo(uniDb: UniverseDatabase) {
         uniDb.insert(*universe)
     }
 
+    fun updateUniverse(vararg universe: Universe) {
+        uniDb.update(*universe)
+    }
+
     fun findByName(name: String): Universe? {
         return uniDb.findByName(name)
     }

@@ -33,6 +33,7 @@ class AppearanceAdapter(private val which: (Int) -> Unit) :
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_appearance, parent, false)
         val viewHolder = ViewHolder(view)
+        which.invoke(listOfAppearance[firstPosition])
         viewHolder.itemView.setOnClickListener {
             val position = viewHolder.bindingAdapterPosition
             viewHolder.checkBox.isChecked = true

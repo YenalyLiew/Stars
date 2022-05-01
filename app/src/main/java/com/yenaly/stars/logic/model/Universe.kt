@@ -20,6 +20,6 @@ data class Universe(
     var lightTime: Int,
     val addTime: Long,
     var remark: String,
-    var focusTime: Int,
+    var focusTime: Float,
     var isLight: Boolean
 ): Serializable

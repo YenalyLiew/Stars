@@ -59,10 +59,13 @@ class LInfoBottomDialog : BottomSheetDialogFragment() {
             .addText(" ", isNewLine = false)
             .addText(universe.lightDate, isNewLine = false)
             .showIn(uniLightDate)
+
+        val time = (System.currentTimeMillis() - universe.addTime) / 1000 / 60
         SpannedTextGenerator.KotlinBuilder()
             .addText(getString(R.string.time), isBold = true, isNewLine = false)
             .addText(" ", isNewLine = false)
-            .addText(universe.lightTime.toString(), isNewLine = false)
+            .addText(time.toString(), isNewLine = false)
+            .addText(getString(R.string.minute), isNewLine = false)
             .showIn(uniTime)
         SpannedTextGenerator.KotlinBuilder()
             .addText(getString(R.string.remark), isBold = true, isNewLine = false)

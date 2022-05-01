@@ -33,7 +33,9 @@ class UniverseLFragment : YenalyFragment<FragmentChildUniverseBinding, MainViewM
     override fun initData() {
         binding.recyclerView.layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        val uniList = viewModel.uniList.filter { it.isLight }
-        binding.recyclerView.adapter = UniverseLAdapter(this, uniList)
+        viewModel.uniListLiveData.observe(viewLifecycleOwner) { allUniList ->
+            val uniList = allUniList.filter { it.isLight }
+            binding.recyclerView.adapter = UniverseLAdapter(this, uniList)
+        }
     }
 }

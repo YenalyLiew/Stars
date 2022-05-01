@@ -10,7 +10,6 @@ import com.yenaly.stars.R
 import com.yenaly.stars.databinding.ItemUniverseBinding
 import com.yenaly.stars.logic.model.Universe
 import com.yenaly.stars.ui.dialog.AddBottomDialog
-import com.yenaly.stars.ui.dialog.LInfoBottomDialog
 import com.yenaly.stars.ui.dialog.NLInfoBottomDialog
 
 /**
@@ -19,8 +18,11 @@ import com.yenaly.stars.ui.dialog.NLInfoBottomDialog
  * @Time : 2022/04/30 030 18:10
  * @Description : Description...
  */
-class UniverseNLAdapter(private val fragment: Fragment, private val uniList: List<Universe>) :
-    RecyclerView.Adapter<UniverseNLAdapter.ViewHolder>() {
+class UniverseNLAdapter(
+    private val fragment: Fragment,
+    private val uniList: List<Universe>,
+    private val refresh: (() -> Unit)? = null
+) : RecyclerView.Adapter<UniverseNLAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ItemUniverseBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -37,12 +39,12 @@ class UniverseNLAdapter(private val fragment: Fragment, private val uniList: Lis
             val position = viewHolder.bindingAdapterPosition
             when (position) {
                 in uniList.indices -> {
-                    val dialog = NLInfoBottomDialog.getInstance(uniList[position])
+                    val dialog = NLInfoBottomDialog.getInstance(uniList[position], refresh)
                     dialog.show(fragment.requireActivity().supportFragmentManager, "NLDialog")
                 }
                 else -> {
                     val dialog = AddBottomDialog {
-                        notifyDataSetChanged()
+                        refresh?.invoke()
                     }
                     dialog.show(fragment.requireActivity().supportFragmentManager, "AddDialog")
                 }
