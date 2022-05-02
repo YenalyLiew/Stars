@@ -26,6 +26,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.yenaly.yenaly_libs.base.dialog.CrashDialogActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

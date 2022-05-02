@@ -51,7 +51,7 @@ class NotificationService : Service() {
             mnm.createNotificationChannel(channel)
         }
         val notificationIntent = Intent(this, MainActivity::class.java)
-        val pt = PendingIntent.getActivity(this, 0, notificationIntent, 0)
+        val pt = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE)
         val notification = NotificationCompat.Builder(this, "114514")
             .setSmallIcon(R.drawable.ic_uni_2)
             .setContentTitle(getString(R.string.app_name))

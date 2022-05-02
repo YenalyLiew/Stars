@@ -18,7 +18,7 @@ class YenalyApplication : Application(), Application.ActivityLifecycleCallbacks 
     override fun onCreate() {
         super.onCreate()
         registerActivityLifecycleCallbacks(this)
-        //YenalyCrashHandler.getInstance()
+        YenalyCrashHandler.getInstance()
     }
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
